@@ -78,21 +78,21 @@ def register_target_commands():
     """This function takes the main cli entry point and root groups in this module and
     adds to them the plugin's groups and commands.
 
-    Example, consider a target `aws` that has an `up` command, and `resize` command.
+    Example, consider a target `vbox` that has an `up` command, and `resize` command.
     Prior to this function, `nursery` and `nursery up` exist. This function would
-    register the `nursery aws` group that gives access to all of the target's commands,
-    like `nursery aws up`. This will also register `nursery up aws` as an alias to
-    `nursery aws up`. It will do this for each of the primary root commands listed
-    by TargetPlugin.actions.
+    register the `nursery vbox` group that gives access to all of the target's commands,
+    like `nursery vbox up`. This will also register `nursery up vbox` as an alias to
+    `nursery vbox up`. It will do this for each of the primary root commands listed
+    by TargetPlugin.root_actions.
     """
     for plugin_cls in env.plugins.values():
-        # Add target group to root commands. E.g. create `nursery aws`
+        # Add target group to root commands. E.g. create `nursery vbox`
         cli.add_command(plugin_cls.cli_entry_func, plugin_cls.cli_entry_func.name)
 
         for cmd in TargetPlugin.root_actions:
             if cmd in plugin_cls.root_command_map:
                 # Find the corresponding group in this module to add the target's
-                # command group to. E.g. Find `nursery up` and add `aws` to it.
+                # command group to. E.g. Find `nursery up` and add `vbox` to it.
                 globals()[f"{cmd}_cmd"].add_command(
                     plugin_cls.root_command_map[cmd], plugin_cls.cli_entry_func.name
                 )
