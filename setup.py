@@ -37,5 +37,5 @@ setup(
     platforms="any",
     tests_require=tests_require,
     url="https://github.com/terminal-labs/nursery",
-    version="0.0.1",
+    version="0.0.1a1",
 )
